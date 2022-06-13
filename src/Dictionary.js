@@ -8,20 +8,25 @@ export default function Dictionary(props) {
   let [results, setResults] = useState(null);
   let [loaded, setLoaded] = useState(false);
 
-  function handleResponse(response) {
+  function handleDictionaryResponse(response) {
     setResults(response.data[0]);
   }
+  function handlePexelsResponse() {}
   function search() {
+    // let pexelsApiKey = 563492ad6f91700001000001aabf5764df074837a170c1fbcc0e858e
     // documentation https://dictionaryapi.dev/
     let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
-    axios.get(apiUrl).then(handleResponse);
+    axios.get(apiUrl).then(handleDictionaryResponse);
+
+    let pexelsApiKey = `563492ad6f91700001000001aabf5764df074837a170c1fbcc0e858e`;
+    let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}`;
+    axios.get(pexelsApiUrl).then(handlePexelsResponse);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     search();
-   }
-
+  }
 
   function handleKeywordChange(event) {
     setKeyword(event.target.value);
@@ -37,7 +42,11 @@ export default function Dictionary(props) {
         <section>
           <h1>What word do you want to look up?</h1>
           <form onSubmit={handleSubmit}>
-            <input type="search" onChange={handleKeywordChange} defaultValue={props.defaultKeyword} />
+            <input
+              type="search"
+              onChange={handleKeywordChange}
+              defaultValue={props.defaultKeyword}
+            />
           </form>
           <div className="hint">
             Suggested words: sunset, wine, yoga, forest, plants...
@@ -50,5 +59,4 @@ export default function Dictionary(props) {
     load();
     return "Loading";
   }
-  
 }
