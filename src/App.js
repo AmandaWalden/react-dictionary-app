@@ -1,4 +1,4 @@
-import logo from './Dictionary3.0.png';
+import logo from './Dictionary4.0.png';
 import './App.css';
 import Dictionary from "./Dictionary";
 
