@@ -3,3 +3,7 @@
     font-weight: bold;
     line-height: 1.5;
 }
+.Results h5 {
+    margin-top: 20px;
+    color: teal;
+}
